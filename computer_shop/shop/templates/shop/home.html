@@ -1,0 +1,383 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HarshivSolutions</title>
+    <link rel="icon" type="image/png" href="{% static 'shop/HS_Logop.png' %}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .navbar {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-content {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .navbar-logo {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+            background: white;
+            padding: 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .navbar-logo:hover {
+            transform: scale(1.1);
+        }
+        
+        .navbar h1 {
+            font-size: 1.8rem;
+            margin: 0;
+        }
+        
+        .section {
+            padding: 5rem 5%;
+            margin-top: 60px;
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 8rem 5% 5rem;
+            margin-top: 60px;
+        }
+        
+        .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #667eea;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .product-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1.5rem;
+        }
+        
+        .product-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+        
+        .product-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .product-price {
+            font-size: 1.5rem;
+            color: #667eea;
+            font-weight: bold;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card .material-icons {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-section {
+            background: #f8f9fa;
+        }
+        
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+        
+        .form-group textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+        
+        .map-container {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            border: none;
+        }
+        
+        .alert {
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border-radius: 5px;
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .contact-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .section {
+                padding: 3rem 5%;
+            }
+            
+            .navbar h1 {
+                font-size: 1.3rem;
+            }
+            
+            .navbar-logo {
+                width: 40px;
+                height: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-content">
+            <a href="#hero">
+                <img src="{% static 'shop/HS_Logop.png' %}" alt="HarshivSolutions Logo" class="navbar-logo">
+            </a>
+            <h1>HarshivSolutions</h1>
+        </div>
+    </nav>
+    
+    <div class="hero" id="hero">
+        <h2>Welcome to HarshivSolutions</h2>
+        <p>Your trusted source for quality computers and IT services</p>
+    </div>
+    
+    <section id="products" class="section">
+        <h2 class="section-title">Our Products</h2>
+        <div class="products-grid">
+            {% for product in products %}
+            <div class="product-card">
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+                <div class="product-info">
+                    <h3>{{ product.name }}</h3>
+                    <p>{{ product.description|truncatewords:15 }}</p>
+                    <div class="product-price">₹{{ product.price }}</div>
+                </div>
+            </div>
+            {% empty %}
+            <p>No products available yet. Please check back soon!</p>
+            {% endfor %}
+        </div>
+    </section>
+    
+    <section id="services" class="section" style="background: #f8f9fa;">
+        <h2 class="section-title">Our Services</h2>
+        <div class="services-grid">
+            {% for service in services %}
+            <div class="service-card">
+                {% if 'material-icons' in service.icon or 'Material Icons' in service.icon %}
+                    <span class="material-icons">{{ service.icon|cut:"material-icons "|cut:"Material Icons " }}</span>
+                {% else %}
+                    <i class="{{ service.icon }}"></i>
+                {% endif %}
+                <h3>{{ service.title }}</h3>
+                <p>{{ service.description }}</p>
+            </div>
+            {% empty %}
+            <div class="service-card">
+                <i class="fas fa-tools"></i>
+                <h3>Computer Repair</h3>
+                <p>Expert repair services for all computer issues</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-laptop-code"></i>
+                <h3>Upgrades</h3>
+                <p>Hardware and software upgrade solutions</p>
+            </div>
+            <div class="service-card">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Round-the-clock technical support</p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    
+    <section id="contact" class="section contact-section">
+        <h2 class="section-title">Contact Us</h2>
+        <div class="contact-container">
+            <div class="contact-form">
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+                
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Message</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+            
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3670.7295289407048!2d70.13293117355401!3d23.070375514545926!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3950b952d115f7dd%3A0x540db779a7cec3da!2sHarshiv%20Solutions!5e0!3m2!1sen!2sin!4v1767246229087!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
